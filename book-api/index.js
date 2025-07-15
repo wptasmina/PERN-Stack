@@ -5,6 +5,7 @@ const PORT = process.env.PORT || 5000
 
 // Middleware to parse JSON bodies
 app.use(express.json())
+app.use(express.urlencoded({ extended: true })) // middleware to form data url- unencoded
 
 //GET/books => Get all books
 app.get('/books', async (req, res) => {
@@ -18,7 +19,9 @@ app.get('/books', async (req, res) => {
 //POST/books => Add a new book
  app.post  ('/books', async (req, res) => {
     try {
-        res.status(201).json({ message: 'Book added successfully', book: req.body})
+        const { name, description} = req.body
+        res.status(201).json({ message: `Book added successfully ${name}, ${description}`})
+        // res.status(201).json({ message: 'Book added successfully', book: req.body})
     } catch (error) {
         res.status(500).json({ message: 'Server Error'})
     }
@@ -45,9 +48,10 @@ app.get('/books', async (req, res) => {
 
  //PUT/books/:id => Update a specific book by ID
     app.put('/books/:id', async (req, res) => {
-        const {id} = req.params
         try {
-            res.status(200).json({ message: `Book with ID:${id} updated successfully`, book: req.body})
+            const {id} = req.params
+            const { name, description } = req.body
+            res.status(200).json({ message: `Book with ID:${id} updated successfully ${name}, ${description}`})
         } catch (error) {
             res.status(500).json({ message: 'Server Error'})
         }
@@ -71,7 +75,7 @@ app.get('/books', async (req, res) => {
             res.status(500).json({ message: 'Server Error'})
         }
     })
-    
+
     // app.delete('/books/:id', async (req, res) => {
     //     const bookId = req.params.id
     //     try {
