@@ -57,14 +57,14 @@ app.get('/books', async (req, res) => {
         }
     })
 
-    // app.put('/books/:id', async (req, res) => {
-    //     const bookId = req.params.id
-    //     try {
-    //         res.status(200).json({ message: `Book with ID: ${bookId} updated successfully`, book: req.body})
-    //     } catch (error) {
-    //         res.status(500).json({ message: 'Server Error'})
-    //     }
-    // })
+    app.put('/books/:id', async (req, res) => {
+        const bookId = req.params.id
+        try {
+            res.status(200).json({ message: `Book with ID: ${bookId} updated successfully`, book: req.body})
+        } catch (error) {
+            res.status(500).json({ message: 'Server Error'})
+        }
+    })
 
 //DELETE/books/:id => Delete a specific book by ID
     app.delete('/books/:id', async (req, res) => {
