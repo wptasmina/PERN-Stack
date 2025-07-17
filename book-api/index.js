@@ -1,7 +1,15 @@
-const express = require('express')
+
+const express = require('express') //npm install express
+const { v4: uuidv4 } = require('uuid'); //npm install uuid
+const pool = require('./db'); // Import the database connection
+
+// const bodyParser = require('body-parser') //npm install body-parser
+// const cors = require('cors') //npm install cors
+
 const app = express()
 
 const PORT = process.env.PORT || 5000
+
 
 // Middleware to parse JSON bodies
 app.use(express.json())
@@ -18,12 +26,21 @@ app.get('/books', async (req, res) => {
 
 //POST/books => Add a new book
  app.post  ('/books', async (req, res) => {
-    try {
-        const { name, description} = req.body
-        res.status(201).json({ message: `Book added successfully ${name}, ${description}`})
+     try {
+         const { name, description, author} = req.body
+         const id = uuidv4(); // Generate a unique ID for the book
+         // Insert the new book into the database
+         const newBook = await pool.query(
+             'INSERT INTO book (id, name, description, author) VALUES ($1, $2, $3, $4) RETURNING *',
+             [id, name, description, author])
+
+        res.status(201).json({ message: `Book added successfully`, data: newBook.rows[0]})
         // res.status(201).json({ message: 'Book added successfully', book: req.body})
+        console.log(req.body)
     } catch (error) {
-        res.status(500).json({ message: 'Server Error'})
+        // res.status(500).json({ message: 'Server Error'})
+        res.json({ error: error.message }) // Return the error message
+        // console.error('Error adding book:', error.message) // Log the error message
     }
  })
 
@@ -57,14 +74,14 @@ app.get('/books', async (req, res) => {
         }
     })
 
-    app.put('/books/:id', async (req, res) => {
-        const bookId = req.params.id
-        try {
-            res.status(200).json({ message: `Book with ID: ${bookId} updated successfully`, book: req.body})
-        } catch (error) {
-            res.status(500).json({ message: 'Server Error'})
-        }
-    })
+    // app.put('/books/:id', async (req, res) => {
+    //     const bookId = req.params.id
+    //     try {
+    //         res.status(200).json({ message: `Book with ID: ${bookId} updated successfully`, book: req.body})
+    //     } catch (error) {
+    //         res.status(500).json({ message: 'Server Error'})
+    //     }
+    // })
 
 //DELETE/books/:id => Delete a specific book by ID
     app.delete('/books/:id', async (req, res) => {
