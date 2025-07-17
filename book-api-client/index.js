@@ -9,9 +9,6 @@ app.use(express.json())// Middleware to parse URL-encoded bodies
 app.use(express.urlencoded({ extended: true })) // Middleware to form data URL-urlencoded support
 
 
-app.listen(PORT, ()=>{
-console.log(`server is running ${PORT}`);
-})
 
 // GET/books/ ->
 // POST/books/ ->
@@ -75,3 +72,9 @@ app.get("/book-api", async(req, res)=>{
         res.status(500).json({error: error.message})
     }
   })
+
+
+// Start the server
+app.listen(PORT, ()=>{
+console.log(`server is running ${PORT}`);
+})
