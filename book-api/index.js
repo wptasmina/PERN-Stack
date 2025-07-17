@@ -24,7 +24,7 @@ app.get('/books', async (req, res) => {
     }
 })
 
-//POST/books => Add a new book
+//POST/books => Add a new book //pool requires a connection to the database
  app.post  ('/books', async (req, res) => {
      try {
          const { name, description, author} = req.body
