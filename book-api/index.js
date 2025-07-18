@@ -48,7 +48,7 @@ app.get('/books', async (req, res) => {
  app.get('/books/:id', async (req, res) => {
     const {id} = req.params
     try {
-        res.status(200).json({ message: `Details of book with ID ${id}`})
+        res.status(200).json({ message: `Details of book with ID: ${id}`})
     } catch (error) {
         res.status(500).json({ message: 'Server Error'})
     }

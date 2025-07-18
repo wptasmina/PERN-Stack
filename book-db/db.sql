@@ -14,3 +14,15 @@ INSERT INTO book (id, name, description, author) VALUES
  ('1', 'Book One', 'Description of Book One', 'Author One'),
  ('2', 'Book Two', 'Description of Book Two', 'Author Two'),
  ('3', 'Book Three', 'Description of Book Three', 'Author Three');
+
+-- Query to select all books from the book table -এটি Terminal এ দিতে হয় না।
+ SELECT * FROM book
+
+-- This will select the specifac  book with id 1
+  SELECT * FROM book WHERE id = '1'; 
+
+-- update the book with id 1
+UPDATE book SET name = 'Updated Book One', description = 'Updated Description of Book One', author = 'Updated Author One' WHERE id = '1'; -- This will update the book with id 1
+
+ -- delete from book where id = '1'; -- This will delete the book with id 1
+ DELETE FROM book WHERE id = '1'; -- This will delete the book with id 1

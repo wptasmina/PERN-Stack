@@ -1,3 +1,15 @@
 {
-    "sqltools.connections": []
+    "sqltools.connections": [
+        {
+            "previewLimit": 50,
+            "server": "localhost",
+            "port": 5432,
+            "driver": "PostgreSQL",
+            "name": "BD Book",
+            "password": "123456",
+            "database": "book_api",
+            "username": "postgres",
+            "connectionTimeout": 30
+        }
+    ]
 }
