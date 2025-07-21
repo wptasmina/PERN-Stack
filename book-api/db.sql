@@ -23,7 +23,7 @@ INSERT INTO books (id, name, description, author) VALUES
 
 
 -- Get all books
-SELECT * FROM books;
+SELECT * FROM books;  ----দেখার জন্য। -----
 
 -- Get a specific book by ID
 SELECT * FROM books WHERE id = '1'
@@ -33,3 +33,18 @@ UPDATE books SET name = 'Updated Book One', description = 'Updated description f
 
 --delete a specific book by ID
 DELETE FROM books WHERE id = '1';
+
+-- Create a new user named user1 with password 'password123
+CREATE USER user1 WITH LOGIN ENCRYPTED PASSWORD '123456'; -- user1 তৈরি করা হয়।-- OR,
+
+CREATE USER user1 WITH PASSWORD 'password123'; --// user1 তৈরি করা হয়।--
+
+-- Grant all privileges on the books table to user1 -- user1 কে books টেবিলের উপর সব অনুমতি দেওয়া হয়েছে।--
+GRANT ALL PRIVILEGES ON TABLE books TO user1;
+
+
+-- Grant SELECT permission on the books table to user1
+GRANT SELECT ON TABLE books TO user1;
+
+-- user1 কে books টেবিল থেকে ডেটা দেখতে পারবে না। --
+REVOKE SELECT ON TABLE books FROM user1; 
