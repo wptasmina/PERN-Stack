@@ -62,7 +62,17 @@ CREATE TABLE person (
   is_active BOOLEAN DEFAULT true
 );
 
--- Create the book table Forent key
+--create table and multipul use:
+CREATE TABLE person2 (
+  id SERIAL,
+  first_name VARCHAR(50) NOT NULL,
+  user_name VARCHAR(50) NOT NULL,
+  email VARCHAR(100) UNIQUE,
+  PRIMARY KEY(id, user_name),  -- id, user_name মিলে হবে প্রাইমারী কী(key)
+  UNIQUE(user_name, age)
+);
+
+-- Create the book table Foreign key
 CREATE TABLE books (
   order_id SERIAL PRIMARY KEY,
   customer_id INTEGER REFERENCES customers(customer_id) --FK
@@ -80,6 +90,17 @@ CREATE TABLE books (
   status BOOLEAN DEFAULT true
 );
 
+INSERT INTO person4 (id, user_name, age, email) VALUES
+('1', 'John Doe', 25, 'Author One'),
+('2', 'Semi deb', 26, 'semi@gmail.com'),
+('3', 'BokerThre', 30, 'thre@gmail.com'),
+('4', 'Doe John', 25, 'tasmi@gmail.com');
+
+next,
+--multtpul data insert:
+INSERT INTO person4 VALUES
+('5', 'deb Semi', 26, 'deb@gmail.com'),
+('6', 'Boker', 30, 'boker@gmail.com');
 
 
 -- Get all books
