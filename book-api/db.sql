@@ -51,11 +51,34 @@ INSERT INTO books (id, name, description, author) VALUES
 
 
 
--- Create the book table 
+-- Create the book table Forent key
+CREATE TABLE person (
+  person_id SERIAL PRIMARY KEY,
+  first_name VARCHAR(50) NOT NULL,
+  last_name VARCHAR(50) NOT NULL,
+  user_name VARCHAR(50) NOT NULL UNIQUE,
+  email VARCHAR(100) UNIQUE,
+  age INTEGER CHECK (age >= 18),
+  is_active BOOLEAN DEFAULT true
+);
+
+-- Create the book table Forent key
 CREATE TABLE books (
-  order_id id SERIAL PRIMARY KEY,
+  order_id SERIAL PRIMARY KEY,
   customer_id INTEGER REFERENCES customers(customer_id) --FK
-)
+);
+
+-- Create the book table Default
+CREATE TABLE books (
+  id SERIAL PRIMARY KEY,
+  age INTEGER CHECK (age >= 18)
+);
+
+-- Create the book table CHECK
+CREATE TABLE books (
+  id SERIAL PRIMARY KEY,
+  status BOOLEAN DEFAULT true
+);
 
 
 
