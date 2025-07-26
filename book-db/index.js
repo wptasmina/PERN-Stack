@@ -19,14 +19,15 @@ app.use(express.json());
 // Delete/books/:id ->
 
 //GET/books => Get all books
- app.get("/books", async (req, res) =>{
+app.get("/books", async (req, res) => {
     try {
-        const books = await pool.query('SELECT * FROM book')
-        res.status(200).json({message: "fetched all books successfully", book: books.rows });
+        const books = await pool.query('SELECT * FROM book');
+        res.status(200).json({ message: "fetched all books successfully", book: books.rows });
     } catch (error) {
-        res.status(500).json({message: "Error fetching books", error: error.message })
+        res.status(500).json({ message: "Error fetching books", error: error.message });
     }
- })
+});
+
 
 //POST/books => Add a new book
  app.post("/books", async (req, res) =>{
@@ -63,21 +64,18 @@ app.get('/books/:id', async (req, res) => {
  app.put('/books/:id', async (req, res) => {
     const { id } = req.params;
     const { name, description, author } = req.body;
+
     try {
         const updatedBook = await pool.query(
             "UPDATE book SET name = $1, description = $2, author = $3 WHERE id = $4 RETURNING *",
             [name, description, author, id]
         )
 
-    res.status(200).json({ message: "Book updated successfully", data: updatedBook.rows[0] });
+    res.status(200).json({ message: `Book updated successfully`, book: updatedBook.rows});
     } catch (error) {
         res.status(500).json({ message: "Error updating book", error: error.message });
     }
  })
-
-
-
-
 
 //DELETE/books/:id => Delete a book by ID
 // app.delete('/books/:id', async (req, res) => {

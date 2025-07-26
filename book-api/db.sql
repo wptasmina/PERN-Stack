@@ -8,16 +8,39 @@ psql -U postgres -d postgres
 -- create a new PostgreSQL database named bookApi;
 CREATE DATABASE bookApi; --ডাটাবেজ তৈরি করা হয়।--
 
+--NOTE CRUD (ডাটাবেজ নাম চেঞ্জ):  Database (ডাটাবেজ তৈরি, নাম চেঞ্জ(Update) এবং Delete করা) = create, update, delete--
+CREATE DATABASE bookApi; ----(1) create
+ALTER DATABASE bookApi RENAME TO bookDB; --(2) (Update) নাম চেঞ্জ--
+DROP DATABASE bookDB; ---(3) Delete করা|
+
+
+
  \c bookApi;   -- Connect to the bookApi database -এর ভিতরে টেবিল তৈরি করতে হবে।
 
 -- Create the book table 
 CREATE TABLE books (
-  id UUID PRIMARY KEY,  -- Use UUID for unique identifiers--  or  id VARCHAR(255) PRIMARY KEY,
-  name VARCHAR(25) UNIQUE NOT NULL,
-  description VARCHAR(255),
+  id UUID PRIMARY KEY,  --or,-- id SERIAL PRIMARY KEY,
+  name VARCHAR(50) UNIQUE NOT NULL,
+  username VARCHAR(50) UNIQUE NOT NULL,
+  description VARCHAR(255) NOT NULL,
+  email VARCHAR(255) UNIQUE,
+  comment VARCHAR(255),
+  age INTEGER CHECK (age >= 18),
+  is_active BOOLEAN,
+  dob DATE,
   author VARCHAR(255) NOT NULL
 );
 
+--Note (id): id UUID PRIMARY KEY (--Use UUID for unique identifiers)
+--or,
+--  id SERIAL PRIMARY KEY (id কে অটো-ইনক্রিমেন্ট ইনটিজার রাখতে চাও, তাহলে লিখবে|)
+--OR,
+--  id VARCHAR(55) PRIMARY KEY (আর যদি id একটি string (text) হয় যেমন: COL-001 তাহলে)
+
+
+--NOTE: CRUD Table -এর নাম চেঞ্জ:
+ALTER TABLE books RENAME TO users; --update
+DROP TABLE books; --Delete করা
 
 
 ----- Insert sample data into the book table
@@ -28,10 +51,11 @@ INSERT INTO books (id, name, description, author) VALUES
 
 
 
---NOTE CUD:  Database (ডাটাবেজ তৈরি, নাম চেঞ্জ(Update) এবং Delete করা) = create, update, delete--
-CREATE DATABASE bookApp; ----(1) create
-ALTER DATABASE bookApp RENAME TO bookDB; --(2) (Update) নাম চেঞ্জ--
-DROP DATABASE bookDB; ---(3) Delete করা|
+-- Create the book table 
+CREATE TABLE books (
+  order_id id SERIAL PRIMARY KEY,
+  customer_id INTEGER REFERENCES customers(customer_id) --FK
+)
 
 
 
