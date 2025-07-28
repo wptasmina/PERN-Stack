@@ -81,16 +81,21 @@ ALTER TABLE person2
     ALTER COLUMN user_age SET UNIQUE;
 
 ALTER TABLE person2
-    ALTER COLUMN user_age drop NOT NULL; --NOT NULL 
+    ALTER COLUMN user_age drop NOT NULL; --delete NOT NULL 
+
+SELECT * FROM person2;
+
+SELECT * FROM person2 
+    WHERE first_name IS NULL;
 
 UPDATE person2
     SET lest_name = 'islam' WHERE lest_name IS NULL;
 
 ALTER TABLE person2
-    alter COLUMN lest_name SET NOT NULL;
+    ALTER COLUMN lest_name SET NOT NULL;
 
 ALTER TABLE person2
-    alter COLUMN lest_name drop NOT NULL;
+   ALTER  COLUMN lest_name drop NOT NULL;
 
 SELECT * FROM person2;
 
@@ -102,3 +107,19 @@ UPDATE person2
 
 ALTER TABLE person2
     ALTER COLUMN test_exam SET NOT NULL;
+
+ALTER TABLE person2
+    RENAME user_age to age;
+
+ALTER TABLE person2
+    ADD constraint unique_person2_user_age UNIQUE(first_name);
+
+ALTER TABLE person2
+    ADD constraint age UNIQUE(age);
+
+ALTER TABLE person2
+    DROP constraint age;
+
+DROP TABLE person2;  --folder delete hobe
+
+TRUNCATE TABLE person2; --table takbe but vitore koso takbe na--
