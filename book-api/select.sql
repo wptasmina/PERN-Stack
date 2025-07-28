@@ -57,3 +57,58 @@ SELECT * FROM students
 SELECT DISTINCT country FROM students; -- UNIQUE - country koyta asci!
 
 SELECT DISTINCT blood_group FROM students; -- UNIQUE - country koyta asci!
+
+
+-- data filtering :
+-- select students from the USA
+-- select students with 'B+' grade AND Economics
+-- select students with a specific blood group ('A+')
+-- select students from the USA or from Australia
+-- select students from the USA or from Australia and the age is 20
+-- select students with a grade of 'A' or "B" in Math or Economics;
+-- select students older then 20
+
+SELECT * FROM students WHERE country = 'USA';
+
+SELECT * FROM students WHERE grade = 'B+' AND course = 'Economics';
+
+SELECT * FROM students WHERE blood_group = 'A+';
+
+SELECT * FROM students WHERE country = 'USA' OR country = 'Bangladesh';
+
+SELECT * FROM students WHERE (country = 'USA' OR country = 'Bangladesh') AND age = 22;
+
+SELECT * FROM students 
+    WHERE age >= 20;
+
+SELECT * FROM students 
+    WHERE age != 20;  --20 jara tadar ki dakabe na
+
+SELECT * FROM students 
+    WHERE age <> 20;
+
+SELECT * FROM students 
+    WHERE country != 'USA';
+
+
+SELECT UPPER(first_name) FROM students;  --uppercase
+
+SELECT UPPER(first_name) AS hasan, * FROM students;
+
+SELECT concat(first_name, ' ', lest_name) from students;  --যোগ করা
+
+SELECT avg(age) FROM students;
+
+SELECT min(age) FROM students;
+
+SELECT max(age) FROM students;
+
+SELECT count(*) FROM students;
+
+SELECT length(first_name) FROM students;
+
+SELECT max(first_name) FROM students;
+
+
+
+
